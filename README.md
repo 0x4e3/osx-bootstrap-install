@@ -5,7 +5,7 @@ This script is a main entypoint to bootstrap fresh Mac OS X with all settings an
 Procedure has tree steps:
 * preparing all to be able to run ansible playbooks;
 * downloading playbook and roles;
-* playing
+* playing :violin:
 
 ## Content
 
@@ -48,3 +48,8 @@ The script has tree main variables:
 * ```version``` -- branch or tag to clone playbook from;
 * ```source_dir``` -- directory path for playbook source;
 * ```remote_source``` -- playbook's repository address
+
+## TODOs
+
+* [ ] add configuration via command-line arguments;
+* [ ] add ansible package installation; 
