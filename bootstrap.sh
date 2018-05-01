@@ -137,6 +137,7 @@ main() {
     printf "${GREEN}"
     echo '#######################'
     cowsay 'Bootstrap Ready!'
+    cowsay 'You may need to restart workstation...'
     echo '#######################'
     printf "${NORMAL}"
 }
