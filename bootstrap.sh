@@ -8,6 +8,7 @@
 declare version="master"
 declare source_dir=~/.osx-bootstrap
 declare remote_source="https://github.com/0x4e3/osx-bootstrap.git"
+declare host_name="adBook"
 
 # sudo keepalive
 startsudo() {
@@ -23,7 +24,13 @@ stopsudo() {
     sudo -k
 }
 
-install_or_update() {
+set_hostname() {
+    scutil --set ComputerName $host_name
+    scutil --set HostName $host_name
+    scutil --set LocalHostName $host_name
+}
+
+install_or_update_bootstrap() {
     command -v git >/dev/null 2>&1 || {
         printf "${RED}Error: git is not installed${NORMAL}\n"
         exit 1
@@ -42,12 +49,32 @@ install_or_update() {
     fi
 }
 
+install_command_line_tools() {
+    OSX_VERS=$(sw_vers -productVersion | awk -F "." '{print $2}')
+
+    if [ "$OSX_VERS" -lt 9 ]; then
+        printf "${RED}Error: bootstrap procedure is not adopted for versions below 10.9${NORMAL}\n"
+        exit 1
+    fi
+
+    touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+    PROD=$(softwareupdate -l | grep "\*.*Command Line" | head -n 1 | awk -F"*" '{print $2}' | sed -e 's/^ *//' | tr -d '\n')
+    softwareupdate -i "$PROD" --verbose
+    rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+}
+
+install_pip_and_ansible() {
+    easy_install --quiet pip
+    pip install --upgrade setuptools --user python
+    pip install -q ansible
+}
+
 ansible_galaxy() {
     env ansible-galaxy install -r $source_dir/requirements.yml --force
 }
 
 ansible() {
-    env ansible-playbook $source_dir/playbook.yml
+    env ansible-playbook -i "localhost" $source_dir/playbook.yml
 }
 
 main() {
@@ -70,7 +97,7 @@ main() {
         NORMAL=""
     fi
 
-    install_or_update
+    install_or_update_bootstrap
 
     printf "${BLUE}"
     echo '#######################'
@@ -79,6 +106,21 @@ main() {
     printf "${NORMAL}\n"
 
     startsudo
+
+    printf "${BLUE}Setting host name to ${host_name}...${NORMAL}\n"
+    set_hostname
+
+    printf "\n"
+
+    if [ ! -f "/Library/Developer/CommandLineTools/usr/bin/clang" ]; then
+        printf "${BLUE}Installing Command Line Tolls...${NORMAL}\n"
+        install_command_line_tools
+    fi
+
+    if [ ! command -v pip >/dev/nul 2>&1 ]; then
+        printf "${BLUE}Installing pip and ansible...${NORMAL}\n"
+        install_pip_and_ansible
+    fi
 
     printf "${BLUE}Installing required roles from ansible-galaxy...${NORMAL}\n"
     ansible_galaxy

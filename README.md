@@ -1,5 +1,7 @@
 # osx-bootstrap-install
 
+[![GitHub license](https://img.shields.io/github/license/0x4e3/osx-bootstrap.svg)](https://github.com/0x4e3/osx-bootstrap/blob/master/LICENSE)
+
 This script is a main entypoint to bootstrap fresh Mac OS X with all settings and tool required for Python full stack development.
 
 Procedure has tree steps:
@@ -47,9 +49,9 @@ Once again, you can re-run script manually.
 The script has tree main variables:
 * ```version``` -- branch or tag to clone playbook from;
 * ```source_dir``` -- directory path for playbook source;
-* ```remote_source``` -- playbook's repository address
+* ```remote_source``` -- playbook's repository address;
+* ```host_name``` -- your host name.
 
 ## TODOs
 
 * [ ] add configuration via command-line arguments;
-* [ ] add ansible package installation; 
