@@ -25,9 +25,9 @@ stopsudo() {
 }
 
 set_hostname() {
-    scutil --set ComputerName $host_name
-    scutil --set HostName $host_name
-    scutil --set LocalHostName $host_name
+    sudo scutil --set ComputerName $host_name
+    sudo scutil --set HostName $host_name
+    sudo scutil --set LocalHostName $host_name
 }
 
 install_or_update_bootstrap() {
@@ -113,14 +113,14 @@ main() {
     printf "\n"
 
     if [ ! -f "/Library/Developer/CommandLineTools/usr/bin/clang" ]; then
-        printf "${BLUE}Installing Command Line Tolls...${NORMAL}\n"
+        printf "${BLUE}Installing Command Line Tools...${NORMAL}\n"
         install_command_line_tools
     fi
 
-    if [ ! command -v pip >/dev/nul 2>&1 ]; then
+    command -v pip >/dev/null 2>&1 || {
         printf "${BLUE}Installing pip and ansible...${NORMAL}\n"
         install_pip_and_ansible
-    fi
+    }
 
     printf "${BLUE}Installing required roles from ansible-galaxy...${NORMAL}\n"
     ansible_galaxy

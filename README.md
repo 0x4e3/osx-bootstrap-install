@@ -20,6 +20,7 @@ Full procedure contains:
 
 ### Disclaimer
 
+Requires Mac OS X 10.9+
 Bootstrap procedure has been tested with Mac OS X 10.12 and 10.13.
 
 ### Basic installation
