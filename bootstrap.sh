@@ -64,9 +64,9 @@ install_command_line_tools() {
 }
 
 install_pip_and_ansible() {
-    easy_install --quiet pip
+    sudo easy_install --quiet pip
     pip install --upgrade setuptools --user python
-    pip install -q ansible
+    sudo pip install -q ansible
 }
 
 ansible_galaxy() {
