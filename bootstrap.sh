@@ -58,8 +58,11 @@ install_command_line_tools() {
     fi
 
     touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
-    PROD=$(softwareupdate -l | grep "\*.*Command Line" | head -n 1 | awk -F"*" '{print $2}' | sed -e 's/^ *//' | tr -d '\n')
-    softwareupdate -i "$PROD" --verbose
+    # PROD=$(softwareupdate -l | grep "\*.*Command Line" | head -n 1 | awk -F"*" '{print $2}' | sed -e 's/^ *//' | tr -d '\n')
+    for clt in "$(softwareupdate -l | grep "\*.*Command Line" | awk -F"*" '{print $2}' | sed -e 's/^ *//')"; do
+        softwareupdate -i "$clt" --verbose
+    done
+    # softwareupdate -i "$PROD" --verbose
     rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
 }
 
