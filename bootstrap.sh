@@ -96,6 +96,11 @@ main() {
         BOLD=""
         NORMAL=""
     fi
+    
+    if [ ! -f "/Library/Developer/CommandLineTools/usr/bin/clang" ]; then
+        printf "${BLUE}Installing Command Line Tools...${NORMAL}\n"
+        install_command_line_tools
+    fi
 
     install_or_update_bootstrap
 
@@ -111,11 +116,6 @@ main() {
     set_hostname
 
     printf "\n"
-
-    if [ ! -f "/Library/Developer/CommandLineTools/usr/bin/clang" ]; then
-        printf "${BLUE}Installing Command Line Tools...${NORMAL}\n"
-        install_command_line_tools
-    fi
 
     command -v pip >/dev/null 2>&1 || {
         printf "${BLUE}Installing pip and ansible...${NORMAL}\n"
