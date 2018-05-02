@@ -38,7 +38,7 @@ install_or_update_bootstrap() {
 
     if [ ! -d $source_dir ]; then
         printf "${BLUE}Downloading Bootstrap...${NORMAL}\n"
-        env git clone $version $remote_source $source_dir || {
+        env git clone -b $version $remote_source $source_dir || {
             printf "${RED}Error: git clone of bootstrap repo failed${NORMAL}\n"
             exit 1
         }
