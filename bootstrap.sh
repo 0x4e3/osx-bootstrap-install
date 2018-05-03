@@ -13,7 +13,7 @@ declare host_name="adBook"
 # sudo keepalive
 startsudo() {
     sudo -v
-    ( while true; do sudo -v; sleep 60; done; ) &
+    ( while true; do sudo -v; sleep 120; done; ) &
     SUDO_PID="$!"
     trap stopsudo SIGINT SIGTERM
 }
