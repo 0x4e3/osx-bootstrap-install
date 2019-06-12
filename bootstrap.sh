@@ -5,7 +5,7 @@
 # Inspired by https://github.com/divio/osx-bootstrap
 
 # Declare main variables.
-declare version="master"
+declare version
 declare source_dir=~/.osx-bootstrap
 declare remote_source="https://github.com/0x4e3/osx-bootstrap.git"
 declare host_name="adBook"
@@ -145,5 +145,11 @@ main() {
     echo '#######################'
     printf "${NORMAL}"
 }
+
+if [ -z "$1" ]; then
+    version="master"
+else
+    version=$1
+fi
 
 main

@@ -31,11 +31,17 @@ Procedure starts by running this script, so run next commend in your command-lin
 sh -c "$(curl -fsSL https://github.com/0x4e3/osx-bootstrap-install/raw/master/bootstrap.sh)"
 ```
 
-Also you can download the script from the repository manually.
+If you want to install ansible playbook from specific branch (not from "master" branch), you can run:  
+
+```bash
+curl -fsSL https://github.com/0x4e3/osx-bootstrap-install/raw/master/bootstrap.sh | bash -s <branch_name>
+```
+
+Also you can download the script from the repository manually.  
 
 ## Getting updates
 
-If you use zsh with oh-my-zsh, you already have an configured ```alias``` to re-run bootstrap. Just run:
+If you use zsh with oh-my-zsh, you already have pre-configured ```alias``` to re-run bootstrap. Just run:
 
 ```bash
 osx-bootstrap
@@ -47,11 +53,13 @@ Once again, you can re-run script manually.
 
 ## Configuring
 
-The script has tree main variables:
+The script has four main variables:
 * ```version``` -- branch or tag to clone playbook from;
 * ```source_dir``` -- directory path for playbook source;
 * ```remote_source``` -- playbook's repository address;
 * ```host_name``` -- your host name.
+
+If you provide an argument to the script, it's value will be saved to the ```version``` variable, so you can controll the branch or tag name for your ansible playbook repository. 
 
 ## TODOs
 
