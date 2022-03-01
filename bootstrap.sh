@@ -9,7 +9,7 @@ declare version
 declare source_dir=~/.osx-bootstrap
 declare remote_source="https://github.com/0x4e3/osx-bootstrap.git"
 declare host_name="adBook"
-declare min_os_version=10.9
+declare min_os_version=11.0
 
 # sudo keepalive
 startsudo() {
