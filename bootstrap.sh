@@ -51,7 +51,7 @@ install_or_update_bootstrap() {
 }
 
 install_command_line_tools() {
-    OSX_VERS=$(sw_vers -productVersion | awk -F "." '{print $2}')
+    OSX_VERS=$(sw_vers -productVersion)
 
     if ( (echo "$OSX_VERS < $min_os_version" | bc -l )); then
         printf "${RED}Error: bootstrap procedure is not adopted for versions below 10.9${NORMAL}\n"
