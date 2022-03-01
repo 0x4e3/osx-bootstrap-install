@@ -64,16 +64,9 @@ install_command_line_tools() {
 }
 
 install_pip_and_ansible() {
-    sudo easy_install --quiet pip
-    pip install --upgrade setuptools --user python
-    sudo pip install -q ansible
-
-    # Install pipsi for python package management.
-    # See https://github.com/mitsuhiko/pipsi for details.
-#     curl https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py | python
-
-#     export PATH="~/.local/bin:$PATH"
-#     env pipsi install ansible
+    # sudo easy_install --quiet pip
+    # pip install --upgrade setuptools --user python
+    sudo pip3 install -q ansible
 }
 
 ansible_galaxy() {
